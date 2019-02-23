@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Handling Form Submission</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
+
+</head>
+<body>
+
+
+<div class="container">
+    <h1>
+        <div th:text="${myPost.title}"></div>
+    </h1>
+
+    <div th:remove="tag" th:utext="${myPost.text} "></div>
+
+    <h2>
+        Leave a comment
+    </h2>
+
+    <form action="#" th:action="@{/comment/create}"  method="post">
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input id="username" class="form-control" name="username" />
+        </div>
+        <div class="form-group">
+            <label for="text">Text</label>
+            <textarea id="text"  name="text" class="form-control" ></textarea>
+
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Submit" />
+        </div>
+
+        <input  type="hidden" name="postId"  th:value="${myPost.id}"/>
+    </form>
+
+    <div  th:each="comment : ${commentList}" class="alert alert-info" role="alert">
+        <div th:text="${comment.username}"></div>
+        <div th:text="${comment.text}"></div>
+    </div>
+
+</div>
+
+</body>
+
+</html>

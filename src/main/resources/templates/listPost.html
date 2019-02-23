@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Handling Form Submission</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container">
+<h1>Blogging...</h1>
+
+    <table class="table table-sm table-striped table-hover table-bordered">
+        <thead>
+            <tr>
+                <th>View</th>
+                <th>Delete</th>
+                <th>User</th>
+                <th>T&iacute;tulo</th>
+                <th>Preview</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="post : ${posts}">
+                <td>
+                    <a th:href="@{'/post/read/' + ${post.id}}">view</a>
+                </td>
+                <td>
+                    <a th:href="@{'/post/delete/' + ${post.id}}">delete</a>
+                </td>
+                <td th:text="${post.username}"></td>
+                <td th:text="${post.title}"></td>
+                <td>
+                    <div th:remove="tag" th:utext="${#strings.abbreviate(post.text,30)} "></div>
+                </td>
+
+            </tr>
+        </tbody>
+</table>
+</div>
+</body>
+</html>

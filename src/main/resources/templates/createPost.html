@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Handling Form Submission</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.js"></script>
+</head>
+<body>
+
+
+<div class="container">
+    <h1>
+        <div th:text="${message}"></div>
+    </h1>
+
+    <form action="#" th:action="@{/post/create}" th:object="${myPost}" method="post">
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input id="username" class="form-control" type="text" th:field="*{username}" />
+        </div>
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input id="title" class="form-control" type="text" th:field="*{title}" />
+        </div>
+        <div class="form-group">
+            Text: <textarea  th:field="*{text}" ></textarea>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Submit" /> <input type="reset" value="Reset" />
+        </div>
+    </form>
+</div>
+
+</body>
+
+<script>
+    $(document).ready(function() {
+        $('textarea').summernote();
+        });
+ </script>
+</html>
