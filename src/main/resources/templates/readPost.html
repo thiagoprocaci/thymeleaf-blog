@@ -9,16 +9,16 @@
 <body>
 
 
-<div class="container">
+<div class="container mt-4">
     <h1>
         <div th:text="${myPost.title}"></div>
     </h1>
 
     <div th:remove="tag" th:utext="${myPost.text} "></div>
 
-    <h2>
+    <h3>
         Leave a comment
-    </h2>
+    </h3>
 
     <form action="#" th:action="@{/comment/create}"  method="post">
         <div class="form-group">
@@ -39,8 +39,12 @@
     </form>
 
     <div  th:each="comment : ${commentList}" class="alert alert-info" role="alert">
-        <div th:text="${comment.username}"></div>
+        <div th:text="${' User: ' + comment.username}"></div>
         <div th:text="${comment.text}"></div>
+    </div>
+
+    <div>
+        <a class="btn btn-primary btn-lg active" role="button" aria-pressed="true"th:href="@{'/post/list/'}">Back</a>
     </div>
 
 </div>

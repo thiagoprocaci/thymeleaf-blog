@@ -58,6 +58,11 @@ public class PostController {
 
     @RequestMapping(value = "delete/{id}", method = RequestMethod.GET)
     public String delete( @PathVariable Long id) {
+        Post post = postRepository.findOne(id);
+        List<Comment> commentList = commentRepository.findByPost(post);
+        for(Comment comment : commentList) {
+            commentRepository.delete(comment);
+        }
         postRepository.delete(id);
         return "redirect:/post/list";
     }

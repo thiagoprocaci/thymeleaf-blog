@@ -11,7 +11,8 @@ public class Post {
     Long id;
     @Column(name = "nome_usuario")
     String username;
-    @Column(name = "texto", length = 4000)
+    @Lob
+    @Column(name = "texto")
     String text;
     @Column(name = "title")
     String title;
