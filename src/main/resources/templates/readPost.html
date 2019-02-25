@@ -9,45 +9,7 @@
 <body>
 
 
-<div class="container mt-4">
-    <h1>
-        <div th:text="${myPost.title}"></div>
-    </h1>
 
-    <div th:remove="tag" th:utext="${myPost.text} "></div>
-
-    <h3>
-        Leave a comment
-    </h3>
-
-    <form action="#" th:action="@{/comment/create}"  method="post">
-        <div class="form-group">
-            <label for="username">Username</label>
-            <input id="username" class="form-control" name="username" />
-        </div>
-        <div class="form-group">
-            <label for="text">Text</label>
-            <textarea id="text"  name="text" class="form-control" ></textarea>
-
-        </div>
-
-        <div class="form-group">
-            <input type="submit" value="Submit" />
-        </div>
-
-        <input  type="hidden" name="postId"  th:value="${myPost.id}"/>
-    </form>
-
-    <div  th:each="comment : ${commentList}" class="alert alert-info" role="alert">
-        <div th:text="${' User: ' + comment.username}"></div>
-        <div th:text="${comment.text}"></div>
-    </div>
-
-    <div>
-        <a class="btn btn-primary btn-lg active" role="button" aria-pressed="true"th:href="@{'/post/list/'}">Back</a>
-    </div>
-
-</div>
 
 </body>
 

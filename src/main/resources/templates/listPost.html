@@ -7,36 +7,6 @@
 </head>
 <body>
 
-<div class="container mt-4">
-<h1>Blogging...</h1>
 
-    <table class="table table-sm table-striped table-hover table-bordered">
-        <thead>
-            <tr>
-                <th>View</th>
-                <th>Delete</th>
-                <th>User</th>
-                <th>T&iacute;tulo</th>
-
-
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="post : ${posts}">
-                <td>
-                    <a th:href="@{'/post/read/' + ${post.id}}">view</a>
-                </td>
-                <td>
-                    <a th:href="@{'/post/delete/' + ${post.id}}">delete</a>
-                </td>
-                <td th:text="${post.username}"></td>
-                <td th:text="${post.title}"></td>
-            </tr>
-        </tbody>
-    </table>
-    <div>
-        <a class="btn btn-primary btn-lg active" role="button" aria-pressed="true"th:href="@{'/post/create/'}">New Post</a>
-    </div>
-</div>
 </body>
 </html>
