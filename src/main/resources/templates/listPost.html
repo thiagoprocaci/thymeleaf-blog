@@ -29,7 +29,7 @@
                 <td>
                     <a th:href="@{'/post/delete/' + ${post.id}}">delete</a>
                 </td>
-                <td th:text="${post.username}"></td>
+                <td th:text="${post.user.username}"></td>
                 <td th:text="${post.title}"></td>
             </tr>
         </tbody>

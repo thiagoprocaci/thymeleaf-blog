@@ -1,9 +1,12 @@
 package com.tbp.controller;
 
+import com.tbp.interceptor.UserSession;
 import com.tbp.model.Comment;
 import com.tbp.model.Post;
+import com.tbp.model.User;
 import com.tbp.repository.CommentRepository;
 import com.tbp.repository.PostRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +23,9 @@ public class PostController {
     PostRepository postRepository;
     @Autowired
     CommentRepository commentRepository;
+    @Autowired
+    UserSession userSession;
+
 
     @RequestMapping(value = "create", method = RequestMethod.GET)
     public String createPage(Model model) {
@@ -30,12 +36,13 @@ public class PostController {
 
     @RequestMapping(value = "create", method = RequestMethod.POST)
     public String createPost(@ModelAttribute Post myPost, Model model) {
-        if(!StringUtils.hasText(myPost.getText()) || !StringUtils.hasText(myPost.getTitle())
-        || !StringUtils.hasText(myPost.getUsername())) {
+        if(!StringUtils.hasText(myPost.getText()) || !StringUtils.hasText(myPost.getTitle())) {
             model.addAttribute("myPost", myPost);
             model.addAttribute("message", "Don't forget to fill everything!");
             return "createPost";
         }
+        User loggerUser = userSession.getLoggerUser();
+        myPost.setUser(loggerUser);
         postRepository.save(myPost);
         return "redirect:list";
     }
