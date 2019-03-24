@@ -10,30 +10,46 @@
 <div class="container mt-4">
 <h1>Blogging...</h1>
 
-    <table class="table table-sm table-striped table-hover table-bordered">
-        <thead>
-            <tr>
-                <th>View</th>
-                <th>Delete</th>
-                <th>User</th>
-                <th>T&iacute;tulo</th>
+
+    <div>
+        <form action="#" th:action="@{/post/list}"  method="get">
+            <div class="form-group">
+                <label for="searchString">Procurando por algo?</label>
+                <input id="searchString" name="searchString" class="form-control" type="text" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Buscar" />
+            </div>
+        </form>
+
+    </div>
+
+    <div>
+        <table class="table table-sm table-striped table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th>View</th>
+                    <th>Delete</th>
+                    <th>User</th>
+                    <th>T&iacute;tulo</th>
 
 
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="post : ${posts}">
-                <td>
-                    <a th:href="@{'/post/read/' + ${post.id}}">view</a>
-                </td>
-                <td>
-                    <a th:href="@{'/post/delete/' + ${post.id}}">delete</a>
-                </td>
-                <td th:text="${post.user.username}"></td>
-                <td th:text="${post.title}"></td>
-            </tr>
-        </tbody>
-    </table>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="post : ${posts}">
+                    <td>
+                        <a th:href="@{'/post/read/' + ${post.id}}">view</a>
+                    </td>
+                    <td>
+                        <a th:href="@{'/post/delete/' + ${post.id}}">delete</a>
+                    </td>
+                    <td th:text="${post.user.username}"></td>
+                    <td th:text="${post.title}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
     <div>
         <a class="btn btn-primary btn-lg active" role="button" aria-pressed="true"th:href="@{'/post/create/'}">New Post</a>
     </div>

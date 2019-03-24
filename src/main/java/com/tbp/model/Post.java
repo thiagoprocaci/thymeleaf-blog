@@ -15,7 +15,7 @@ public class Post {
     @Lob
     @Column(name = "texto")
     String text;
-    @Column(name = "title")
+    @Column(name = "titulo")
     String title;
 
     public Long getId() {

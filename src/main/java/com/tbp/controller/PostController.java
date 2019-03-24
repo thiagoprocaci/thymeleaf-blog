@@ -48,9 +48,15 @@ public class PostController {
     }
 
     @RequestMapping(value = "list", method = RequestMethod.GET)
-    public String listPage(Model model) {
-        Iterable<Post> all = postRepository.findAll();
-        model.addAttribute("posts", all);
+    public String listPage(Model model,
+                           @RequestParam(value = "searchString", required = false) String searchString) {
+        Iterable<Post> posts;
+        if(StringUtils.hasText(searchString)) {
+            posts = postRepository.findByText(searchString);
+        } else {
+            posts =  postRepository.findAll();
+        }
+        model.addAttribute("posts", posts);
         return "listPost";
     }
 
