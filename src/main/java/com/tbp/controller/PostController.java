@@ -27,59 +27,6 @@ public class PostController {
     UserSession userSession;
 
 
-    @RequestMapping(value = "create", method = RequestMethod.GET)
-    public String createPage(Model model) {
-        model.addAttribute("myPost", new Post());
-        model.addAttribute("message", "Blogging ...");
-        return "createPost";
-    }
-
-    @RequestMapping(value = "create", method = RequestMethod.POST)
-    public String createPost(@ModelAttribute Post myPost, Model model) {
-        if(!StringUtils.hasText(myPost.getText()) || !StringUtils.hasText(myPost.getTitle())) {
-            model.addAttribute("myPost", myPost);
-            model.addAttribute("message", "Don't forget to fill everything!");
-            return "createPost";
-        }
-        User loggerUser = userSession.getLoggerUser();
-        myPost.setUser(loggerUser);
-        postRepository.save(myPost);
-        return "redirect:list";
-    }
-
-    @RequestMapping(value = "list", method = RequestMethod.GET)
-    public String listPage(Model model,
-                           @RequestParam(value = "searchString", required = false) String searchString) {
-        Iterable<Post> posts;
-        if(StringUtils.hasText(searchString)) {
-            posts = postRepository.findByText(searchString);
-        } else {
-            posts =  postRepository.findAll();
-        }
-        model.addAttribute("posts", posts);
-        return "listPost";
-    }
-
-    @RequestMapping(value = "read/{id}", method = RequestMethod.GET)
-    public String readPage(Model model, @PathVariable Long id) {
-        Post post = postRepository.findOne(id);
-        List<Comment> commentList = commentRepository.findByPost(post);
-        model.addAttribute("myPost", post);
-        model.addAttribute("commentList", commentList);
-        return "readPost";
-    }
-
-    @RequestMapping(value = "delete/{id}", method = RequestMethod.GET)
-    public String delete( @PathVariable Long id) {
-        Post post = postRepository.findOne(id);
-        List<Comment> commentList = commentRepository.findByPost(post);
-        for(Comment comment : commentList) {
-            commentRepository.delete(comment);
-        }
-        postRepository.delete(id);
-        return "redirect:/post/list";
-    }
-
 
 
 

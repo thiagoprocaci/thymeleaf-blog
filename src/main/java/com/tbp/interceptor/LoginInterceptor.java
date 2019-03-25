@@ -16,13 +16,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        String url = request.getRequestURI();
-        if(userSession.getLoggerUser() != null || url.contains("/user")) {
-            return true;
-        }
-        String loginPage = request.getContextPath() + "/user/login";
-        response.sendRedirect(loginPage);
-        return false;
+        return true;
     }
 
     @Override
