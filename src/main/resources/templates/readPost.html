@@ -16,6 +16,16 @@
 
     <div th:remove="tag" th:utext="${myPost.text} "></div>
 
+    <div>
+        <a th:href="@{'/post/like/' + ${myPost.id}}">Like</a>
+    </div>
+    <div>
+        Likes:
+        <div th:remove="tag" th:text="${totalLikes}">
+        </div>
+    </div>
+
+
     <h3>
         Leave a comment
     </h3>

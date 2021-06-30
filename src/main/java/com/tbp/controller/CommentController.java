@@ -24,5 +24,20 @@ public class CommentController {
     @Autowired
     UserSession userSession;
 
+    @RequestMapping(value = "create", method = RequestMethod.POST)
+    public String createComment(@RequestParam("text") String text,
+                                @RequestParam("postId") Long postId) {
+        if(StringUtils.hasText(text)) {
+            Post post = postRepository.findOne(postId);
+            Comment comment = new Comment();
+            comment.setText(text);
+            comment.setPost(post);
+            User loggedUser = userSession.getLoggerUser();
+            comment.setUser(loggedUser);
+            commentRepository.save(comment);
+        }
+        return "redirect:/post/read/" + postId;
+    }
+
 
 }
