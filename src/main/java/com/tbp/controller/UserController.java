@@ -38,7 +38,7 @@ public class UserController {
             String pass = encryptyPass(myUser.getPassword());
             myUser.setPassword(pass);
             userRepository.save(myUser);
-            return "retdirect:/post/list";
+            return "redirect:/post/list";
         } else {
             model.addAttribute("myUser", new User());
             model.addAttribute("message", "Choose another username");
